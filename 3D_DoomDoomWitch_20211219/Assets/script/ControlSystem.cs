@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+using System.Collections;           //引用 系統.集合
+using System.Collections.Generic;   //引用 系統,集合.一般 (包含 List)
 
 /// <summary>
 /// 控制系統
@@ -24,11 +23,28 @@ public class ControlSystem : MonoBehaviour
     public LayerMask layerToHit;
     [Header("測試滑鼠位置")]
     public Transform traTestMousePosition;
+    [Header("所有彈珠")]
+    public List<GameObject> listMarbles = new List<GameObject>();
+    [Header("發射間隔"), Range(0, 5)]
+    public float fireInterval = 0.5f;
+
+
+    /// <summary>
+    /// 所有彈珠數量
+    /// </summary>
+    public static int allMarbles;
     #endregion
 
 
 
     #region 事件
+    private void Start()
+    {
+        // 2 為初始彈珠生成數量
+        for (int i = 0; i < 2; i++) SpawnMarble();
+
+    }
+
     private void Update()
     {
         MouseControl();
@@ -37,13 +53,27 @@ public class ControlSystem : MonoBehaviour
 
 
     #region 方法
+    /// <summary>
+    /// 生成彈珠存放到清單內
+    ///</summary>
+    private void SpawnMarble()
+    {
+        //彈珠總數增加
+        allMarbles++;
+        //所有彈珠清單.添加(生成彈珠)
+        listMarbles.Add(Instantiate(goMarbles,new Vector3(0,0,100),Quaternion.identity));
+    }
 
     /// <summary>
     /// 滑鼠控制
     /// </summary>
     private void MouseControl()
     {
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            goArrow.SetActive(true);
+        }
+        else if (Input.GetKey(KeyCode.Mouse0))
         {
             Vector3 v3Mouse = Input.mousePosition;
 
@@ -63,8 +93,32 @@ public class ControlSystem : MonoBehaviour
                 Vector3 hitPosition = hit.point;                // 取得碰撞資訊的座標
                 hitPosition.y = 0.5f;                           //調整高度軸向
                 traTestMousePosition.position = hitPosition;    //更新測試物件座標
+
+                //角 色 的 z 鍵 = 測試物件的座標 - 角色的座標 (向量)
+                transform.forward = traTestMousePosition.position - transform.position;
             }
         }
+        else if (Input.GetKeyUp(KeyCode.Mouse0))
+        {
+            StartCoroutine(FireMarble());
+        }
+    }
+
+    /// <summary>
+    /// 發射間隔
+    /// </summary>
+    private IEnumerator FireMarble()
+    {
+            for (int i = 0; i < listMarbles.Count; i++)
+            {
+                GameObject temp = listMarbles[i];
+                temp.transform.position = traSpawnPoint.position;
+                temp.transform.rotation = traSpawnPoint.rotation;
+                temp.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                temp.GetComponent<Rigidbody>().AddForce(traSpawnPoint.forward * speedShoot);
+                yield return new WaitForSeconds(fireInterval);
+            }
+            goArrow.SetActive(false);
     }
     #endregion
 }
