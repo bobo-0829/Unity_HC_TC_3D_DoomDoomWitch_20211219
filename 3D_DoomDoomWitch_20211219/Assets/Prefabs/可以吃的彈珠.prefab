@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 837882065604243888}
   - component: {fileID: 5889328603170225588}
   - component: {fileID: 3109120112693420282}
-  - component: {fileID: 8928086151072385346}
   - component: {fileID: 5179160953305552424}
   - component: {fileID: 6801635225949334434}
-  m_Layer: 7
+  - component: {fileID: -6466824407396936285}
+  m_Layer: 0
   m_Name: "\u53EF\u4EE5\u5403\u7684\u5F48\u73E0"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,8 +29,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1424191449318632757}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -84,19 +84,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &8928086151072385346
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1424191449318632757}
-  m_Material: {fileID: 13400000, guid: 6c513da667083384c92d13446ad68731, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5179160953305552424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,6 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37f6a6e57285e734895769a7d5c2b31d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attack: 0
 --- !u!114 &6801635225949334434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,6 +109,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 254a42d39ebf6ba498d40da7d1d433e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gm: {fileID: 0}
   moveDistance: 2
   moveUnderLine: -2
+  nameMarble: "\u5F48\u73E0"
+  hp: 1
+  hasUI: 0
+--- !u!65 &-6466824407396936285
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1424191449318632757}
+  m_Material: {fileID: 13400000, guid: 6c513da667083384c92d13446ad68731, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}

@@ -18,7 +18,7 @@ public class RecycleMarble : MonoBehaviour
             //Μ紆痌计秖 糤
             recycleMarbles++;
             // 狦 Μ计秖 单 ┮Τ紆痌计秖 ち传 寄よ
-            if (recycleMarbles == ControlSystem.allMarbles)gm.SwitchTurn(false);
+            if (recycleMarbles == ControlSystem.shootMarbles) gm.SwitchTurn(false);
         }
     }
 }

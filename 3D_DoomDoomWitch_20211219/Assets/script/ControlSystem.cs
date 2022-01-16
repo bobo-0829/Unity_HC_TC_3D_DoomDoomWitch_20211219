@@ -33,15 +33,30 @@ public class ControlSystem : MonoBehaviour
     /// ┮Τ紆痌计秖
     /// </summary>
     public static int allMarbles;
+
+    /// <summary>
+    /// 祇甮程紆痌计秖
+    /// </summary>
+    public static int maxMarbles = 2;
+
+    /// <summary>
+    /// –Ω祇甮紆痌计秖
+    /// </summary>
+    public static int shootMarbles;
+
+    /// <summary>
+    /// 琌祇甮
+    /// </summary>
+    public bool canShoot = true;
     #endregion
 
 
 
     #region ㄆン
     private void Start()
-    {
-        // 2 ﹍紆痌ネΘ计秖
-        for (int i = 0; i < 2; i++) SpawnMarble();
+    { 
+        // 50 ﹍紆痌ネΘ计秖
+        for (int i = 0; i < 50; i++) SpawnMarble();
 
     }
 
@@ -69,6 +84,8 @@ public class ControlSystem : MonoBehaviour
     /// </summary>
     private void MouseControl()
     {
+        if (!canShoot) return;
+
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             goArrow.SetActive(true);
@@ -101,6 +118,7 @@ public class ControlSystem : MonoBehaviour
         else if (Input.GetKeyUp(KeyCode.Mouse0))
         {
             StartCoroutine(FireMarble());
+            canShoot = false;
         }
     }
 
@@ -109,8 +127,11 @@ public class ControlSystem : MonoBehaviour
     /// </summary>
     private IEnumerator FireMarble()
     {
-            for (int i = 0; i < listMarbles.Count; i++)
+        shootMarbles = 0;
+
+            for (int i = 0; i < maxMarbles; i++)
             {
+                shootMarbles++;
                 GameObject temp = listMarbles[i];
                 temp.transform.position = traSpawnPoint.position;
                 temp.transform.rotation = traSpawnPoint.rotation;

@@ -8911,7 +8911,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 50c54f63d94a15f43a2f71d1fc6bd40d, type: 3}
       propertyPath: m_Name
-      value: "\u8C93\u54AA"
+      value: "\u8C93"
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 50c54f63d94a15f43a2f71d1fc6bd40d, type: 3}
       propertyPath: m_Controller
@@ -8951,6 +8951,7 @@ MonoBehaviour:
   traTestMousePosition: {fileID: 424178015}
   listMarbles: []
   fireInterval: 0.1
+  canShoot: 1
 --- !u!1001 &484671768
 PrefabInstance:
   m_ObjectHideFlags: 0

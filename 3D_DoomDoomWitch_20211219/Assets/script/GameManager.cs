@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public Turn turn = Turn.My;
 
+    [Header("敵方回合事件")]
+    public UnityEvent onEnemyTurn;
     [Header("怪物陣列")]
     public GameObject[] goEnemys; 
     [Header("彈珠")]
@@ -31,6 +34,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     [SerializeField]
     private List<int> indexColumnSecond = new List<int>();
+    private ControlSystem controlSystem;
 
     private void Awake()
     {
@@ -44,6 +48,8 @@ public class GameManager : MonoBehaviour
         {
             traColumnSecond[i - countRow - 1] = tracheckboards[i];
         }
+
+        controlSystem = FindObjectOfType<ControlSystem>();
 
         SpawnEnemy();
     }
@@ -80,8 +86,16 @@ public class GameManager : MonoBehaviour
     /// <param name="isMyTurn"></param>
     public void SwitchTurn(bool isMyTurn)
     {
-        if (isMyTurn) turn = Turn.My;
-        else turn = Turn.Enumy;
+        if (isMyTurn)
+        {
+            turn = Turn.My;
+            controlSystem.canShoot = true;
+        }
+        else
+        {
+            turn = Turn.Enumy;
+            onEnemyTurn.Invoke();
+        }
     }
 }
 /// <summary>
