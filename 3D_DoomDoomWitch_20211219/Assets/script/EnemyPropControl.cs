@@ -43,6 +43,8 @@ public class EnemyPropControl : MonoBehaviour
     {
         transform.position += Vector3.forward * moveDistance;
 
+        gm.SwitchTurn(true);        //移動後恢復我方回合
+
         if (transform.position.z >= moveUnderLine) DestroyObject();
     }
 
